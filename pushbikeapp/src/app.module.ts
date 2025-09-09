@@ -13,17 +13,19 @@ import { StatistikModule } from './statistik/statistik.module';
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule.forRoot({
-  type: 'mysql',
-  host: process.env.MYSQLHOST, 
-  port: parseInt(process.env.MYSQLPORT || '3306', 10),
-  username: process.env.MYSQLUSER,
-  password: process.env.MYSQLPASSWORD,
-  database: process.env.MYSQLDATABASE,
-  autoLoadEntities: true,
-  synchronize: false,
-  migrationsRun: true,
-}),
-
+      type: 'mysql',
+      host: process.env.MYSQLHOST,       // ⬅️ Railway var
+      port: parseInt(process.env.MYSQLPORT || '3306', 10),
+      username: process.env.MYSQLUSER,
+      password: process.env.MYSQLPASSWORD,
+      database: process.env.MYSQLDATABASE,
+      autoLoadEntities: true,
+      synchronize: false,
+      migrationsRun: true,
+      ssl: process.env.NODE_ENV === 'production'
+        ? { rejectUnauthorized: false }
+        : false,
+    }),
     UsersModule,
     EmailModule,
     LombaModule,
