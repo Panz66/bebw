@@ -14,18 +14,16 @@ import { StatistikModule } from './statistik/statistik.module';
     ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: process.env.MYSQLHOST,       // ⬅️ Railway var
-      port: parseInt(process.env.MYSQLPORT || '3306', 10),
-      username: process.env.MYSQLUSER,
-      password: process.env.MYSQLPASSWORD,
-      database: process.env.MYSQLDATABASE,
+      host: process.env.DB_HOST,
+      port: parseInt(process.env.DB_PORT || '3306', 10),
+      username: process.env.DB_USER,      // disesuaikan
+      password: process.env.DB_PASS,      // disesuaikan
+      database: process.env.DB_NAME,      // disesuaikan
       autoLoadEntities: true,
       synchronize: false,
       migrationsRun: true,
-      ssl: process.env.NODE_ENV === 'production'
-        ? { rejectUnauthorized: false }
-        : false,
     }),
+
     UsersModule,
     EmailModule,
     LombaModule,
