@@ -1,5 +1,6 @@
 /* eslint-disable prettier/prettier */
 import 'dotenv/config';
+import 'reflect-metadata'; // penting buat typeorm
 import { DataSource } from 'typeorm';
 
 export const AppDataSource = new DataSource({
@@ -9,8 +10,9 @@ export const AppDataSource = new DataSource({
   username: process.env.DB_USER,
   password: process.env.DB_PASS,
   database: process.env.DB_NAME,
-  entities: [__dirname + '/entities/*.entity{.ts,.js}'],
+  entities: [__dirname + '/**/*.entity{.ts,.js}'], // scan semua entity
   migrations: [__dirname + '/migrations/*{.ts,.js}'],
   synchronize: false,
+  logging: true, // biar kelihatan query
   ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false,
 });
