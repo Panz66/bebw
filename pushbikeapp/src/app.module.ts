@@ -16,11 +16,11 @@ import { StatistikModule } from './statistik/statistik.module';
       type: 'mysql',
       host: process.env.DB_HOST,
       port: parseInt(process.env.DB_PORT || '3306', 10),
-      username: process.env.DB_USER,      // disesuaikan
-      password: process.env.DB_PASS,      // disesuaikan
-      database: process.env.DB_NAME,      // disesuaikan
+      username: process.env.DB_USERNAME,      // disesuaikan
+      password: process.env.DB_PASSWORD,      // disesuaikan
+      database: process.env.DB_DATABASE,      // disesuaikan
       autoLoadEntities: true,
-      synchronize: false,
+      synchronize: true,
       migrationsRun: true,
     }),
 
